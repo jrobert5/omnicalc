@@ -108,27 +108,37 @@ class CalculationsController < ApplicationController
 
     @range = @numbers.max - @numbers.min
 
-# sorted = @numbers.sort
-# array_count = sorted.length
-#
-# if arraycount.even
-#
-#
-# elsif arraycount.odd
-#
-#
-# end
+    sorted = @numbers.sort
+    array_count = sorted.length
 
 
-    @median = @numbers.sort
+    if array_count.even?
+      array_median = (sorted[array_count/2-1]+sorted[array_count/2])/2
+    elsif array_count.odd?
+
+        array_median = sorted[array_count/2]
+    end
+
+    @median = array_median
 
     @sum = @numbers.sum
 
     @mean = @numbers.sum/@numbers.count
 
-    @variance = "Replace this string with your answer."
+    ind_variance =[]
+    sorted.each do |num|
+      ind_variance.push((num-array_median)**2)
 
-    @standard_deviation = "Replace this string with your answer."
+    end
+console
+
+      array_variance= ind_variance.sum/array_count
+
+    @variance = array_variance
+
+    @standard_deviation = array_variance ** (0.5)
+
+
 
     @mode = "Replace this string with your answer."
 
